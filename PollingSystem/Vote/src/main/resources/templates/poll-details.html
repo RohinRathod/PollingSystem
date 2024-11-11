@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            margin: 20px 0;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+		.logout-btn {
+				           position: absolute;
+				           top: 20px;
+				           right: 20px;
+				           background-color: #dc3545;
+				           color: white;
+				           padding: 10px 20px;
+				           text-decoration: none;
+				           border-radius: 5px;
+				           border: none;
+				       }
+    </style>
+</head>
+<body>
+	<a href="/logout" class="logout-btn">Logout</a>
+    <h1 th:text="${poll.title}"></h1>
+    <p th:text="${poll.description}"></p>
+
+    <form th:action="@{'/poll/' + ${poll.id} + '/vote'}" method="post">
+        <div th:each="option : ${poll.options}">
+			
+            <input type="radio" th:value="${option.id}" name="optionId" required>
+			
+            <label th:text="${option.optionText}"></label><br>
+        </div>
+        <br>
+        <button type="submit">Submit Vote</button>
+    </form>
+</body>
+</html>

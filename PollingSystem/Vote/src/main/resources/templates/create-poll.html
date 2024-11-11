@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Poll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #add-option-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+		       .logout-btn {
+		           position: absolute;
+		           top: 20px;
+		           right: 20px;
+		           background-color: #dc3545;
+		           color: white;
+		           padding: 10px 20px;
+		           text-decoration: none;
+		           border-radius: 5px;
+		           border: none;
+		       }
+		
+    </style>
+</head>
+<body>
+	<a href="/logout" class="logout-btn">Logout</a>
+    <h1>Create a New Poll</h1>
+	
+	<form action="/create" method="post">
+	    <label for="title">Poll Title:</label>
+	    <input type="text" id="title" name="title" required>
+
+	    <label for="description">Poll Description:</label>
+	    <textarea id="description" name="description" required></textarea>
+
+	    <div id="options-container">
+	        <label for="option1">Option 1:</label>
+	        <input type="text" id="option1" name="options[0].optionText" required>
+
+	        <label for="option2">Option 2:</label>
+	        <input type="text" id="option2" name="options[1].optionText" required>
+	    </div>
+
+		<div th:if="${isAdmin}">
+		            <button id="add-option-btn" type="button">Add Option</button>
+		        </div>
+				
+				
+
+	    <button type="submit">Create Poll</button>
+	</form>
+
+	<script>
+	    let optionIndex = 2;  // Starting from 2 since Option 1 and 2 are already present
+	    document.getElementById('add-option-btn')?.addEventListener('click', function() {
+	        const optionsContainer = document.getElementById('options-container');
+	        const newOption = document.createElement('div');
+	        newOption.innerHTML = `
+	            <label>Option ${optionIndex + 1}:</label>
+	            <input type="text" name="options[${optionIndex}].optionText" placeholder="Enter option" required><br>
+	        `;
+	        optionsContainer.appendChild(newOption);
+	        optionIndex++;
+	    });
+	</script>
+
+</body>
+</html>
