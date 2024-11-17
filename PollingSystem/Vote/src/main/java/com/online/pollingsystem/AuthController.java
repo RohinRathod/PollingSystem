@@ -35,5 +35,11 @@ public class AuthController {
 		userService.saveUser(user, null);
 		return "redirect:/login";
 	}
+	
+	@PostMapping("/error")
+	public String logger() {
+		return "Errors";
+		
+	}
 
 }
