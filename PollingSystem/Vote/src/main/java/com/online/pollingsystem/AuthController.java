@@ -41,5 +41,12 @@ public class AuthController {
 		return "Errors";
 		
 	}
+	
+	@PostMapping("/hey")
+	public String hey() {
+		return "Hey";
+		
+	}
+	
 
 }
