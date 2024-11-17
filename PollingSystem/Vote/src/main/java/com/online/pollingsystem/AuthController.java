@@ -48,5 +48,11 @@ public class AuthController {
 		
 	}
 	
+	@PostMapping("/heyTge")
+	public String heyTge() {
+		return "Hey";
+		
+	}
+	
 
 }
